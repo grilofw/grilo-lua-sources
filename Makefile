@@ -7,9 +7,9 @@ check-dirs:
 	@pkg-config --variable scriptsdir libquvi-scripts-0.9 > /dev/null
 
 install: check-dirs
-	@for i in grilo/*.lua; do
-		install -D -m 0644 $i $(GRILO_DIR)/`basename $i`
+	@for i in grilo/*.lua; do \
+		install -D -m 0644 $$i $(GRILO_DIR)/`basename $$i` ; \
 	done
-	@for i in quvi/*lua; do
-		install -D -m 0644 $i $(QUVI_DIR)/`basename $i`
+	@for i in quvi/*lua; do \
+		install -D -m 0644 $$i $(QUVI_DIR)/`basename $$i` ; \
 	done
