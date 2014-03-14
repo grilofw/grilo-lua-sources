@@ -31,7 +31,7 @@ source = {
   id = "grl-xnxx",
   name = "xnxx.com / XVideos",
   description = "xnxx.com",
-  supported_keys = { "thumbnail", 'duration', 'external-url', 'title', 'id' },
+  supported_keys = { 'thumbnail', 'duration', 'external-url', 'title', 'id' },
   tags = { 'adult' },
 }
 
@@ -76,9 +76,6 @@ function grl_source_browse(media_id)
     end
     return
   end
-
-  local count = grl.get_options("count")
-  local skip = grl.get_options("skip")
 
   if skip ~= 0 then
     page, skip = page_for_skip(false, media_id, skip)
