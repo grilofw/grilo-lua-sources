@@ -103,7 +103,7 @@ function create_media(item)
   media.id = item.id
   media.title = item.webTitle
   media.thumbnail = item.fields.thumbnail
-  media.mime = 'image/jpeg'
+  media.mime_type = 'image/jpeg'
   media.external_url = item.webUrl
 
   local last_width = 0
