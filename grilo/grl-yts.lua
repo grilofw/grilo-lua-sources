@@ -137,18 +137,18 @@ function parse_page(page, medias)
   end
 
   for index, item in pairs(json.MovieList) do
-    media = {}
-
     -- local inspect = require('inspect')
     -- print (inspect(item))
 
     if item.State == 'OK' then
+      local media = {}
+
       media.thumbnail = item.CoverImage
       media.genre = item.Genre
       media.tmdb_imdb_id = item.ImdbCode
       media.rating = item.MovieRating
       media.title = item.MovieTitleClean
-      media.id = item.MovieId
+      media.id = item.MovieID
       media.external_url = item.MovieUrl
       media.creation_date = item.MovieYear
       media['type'] = 'video'
