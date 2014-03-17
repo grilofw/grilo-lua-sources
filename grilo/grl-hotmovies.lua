@@ -50,7 +50,7 @@ function grl_source_resolve()
 
   req = grl.get_media_keys()
   if not req or not req.title then
-    grl.callback(nil, 0)
+    grl.callback()
     return
   end
 
@@ -76,7 +76,7 @@ function fetch_results_cb(results)
       grl.debug ("Fetching movie page " .. url .. " for ID " .. id)
       grl.fetch(url, "fetch_page_cb")
   else
-    grl.callback(nil, 0)
+    grl.callback()
   end
 end
 
