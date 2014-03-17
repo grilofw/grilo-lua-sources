@@ -99,11 +99,11 @@ end
 ---------------
 
 function fetch_results_cb(results)
-  local skip = grl.get_options("skip")
   local count = grl.get_options("count")
 
   if not results then
     grl.callback()
+    return
   end
 
   local medias = {}
@@ -113,17 +113,21 @@ function fetch_results_cb(results)
   end
 
   local num_results = #medias
+  if num_results > count then
+    num_results = count
+  end
+  if num_results == 0 then
+    grl.callback()
+    return
+  end
 
   -- Send out the results
   for i, media in ipairs(medias) do
-    if skip > 0 then
-      skip = skip - 1
-    else
-      if count > 0 then
-        num_results = num_results - 1
-        count = count - 1
-        grl.callback(media, num_results)
-      end
+    if count > 0 then
+      num_results = num_results - 1
+      count = count - 1
+      grl.debug ('Sending out media ' .. media.id .. ' (left: ' .. num_results .. ')')
+      grl.callback(media, num_results)
     end
   end
 end
