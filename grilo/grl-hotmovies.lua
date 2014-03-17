@@ -51,6 +51,7 @@ function grl_source_resolve()
   req = grl.get_media_keys()
   if not req or not req.title then
     grl.callback(nil, 0)
+    return
   end
 
   -- title = "Bobbi's+World"
