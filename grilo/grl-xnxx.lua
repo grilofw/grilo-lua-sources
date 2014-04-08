@@ -31,6 +31,7 @@ source = {
   id = "grl-xnxx",
   name = "xnxx.com / XVideos",
   description = "xnxx.com",
+  supported_media = 'video',
   supported_keys = { 'thumbnail', 'duration', 'external-url', 'title', 'id' },
   tags = { 'adult' },
 }

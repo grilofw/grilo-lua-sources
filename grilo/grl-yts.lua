@@ -34,6 +34,7 @@ source = {
   description = "YTS",
   -- FIXME add size
   supported_keys = { 'thumbnail', 'genre', 'tmdb-imdb-id', 'rating', 'creation-date', 'external-url', 'title', 'id', 'url', 'mime-type' },
+  supported_media = 'video',
   tags = { 'cinema' },
   auto_split_threshold = 50
 }

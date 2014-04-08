@@ -27,6 +27,7 @@ source = {
   name = "hotmovies",
   description = "HotMovies.com",
   supported_keys = { "thumbnail", 'studio', 'director', 'duration', 'description', 'external-url', 'performer', 'keyword' },
+  supported_media = 'video',
   resolve_keys = {
     ["type"] = "video",
     required = { "title" },
