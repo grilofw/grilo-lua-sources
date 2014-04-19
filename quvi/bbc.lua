@@ -191,7 +191,7 @@ function parse(qargs)
             -- Get authstring from more specific mediaselector if
             -- this mode is specified - fails sometimes otherwise
             if needs_new_authString(params) then
-                local xml_url =
+                local xml_uri =
                     'http://www.bbc.co.uk/mediaselector/4/mtis/stream/' ..
                     media_id .. '/' .. mparams['service'] .. '/' .. params['kind'] ..
                     "?cb=" .. math.random(10000)
