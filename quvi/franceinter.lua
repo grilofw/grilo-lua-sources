@@ -55,6 +55,10 @@ function parse(qargs)
     qargs.thumb_url =
         'http://franceinter.fr/' .. section:match('<img src="(.-)" .- class="illus"/>') or ''
 
+    -- FIXME Link back to description page?
+    -- local U = require 'quvi/util'
+    -- local more_info_url = U.unescape (p:match('u=(http.-)&amp;')) or ''
+
     qargs.streams = FranceInter.iter_streams(p)
 
     return qargs
