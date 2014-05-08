@@ -276,7 +276,7 @@ end
 function fetch_front_cb(results)
   if not results then
     grl.warning('Failed to fetch the front page')
-    grl.calback()
+    grl.callback()
     return
   end
 
