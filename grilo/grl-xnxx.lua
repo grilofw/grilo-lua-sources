@@ -285,6 +285,12 @@ function fetch_front_cb(results)
   end
 
   local s = results:match('ALL SEX VIDEOS:</b><br>(.-)<a href="http://www%.xnxx%.com/tags/">')
+  if not s then
+    grl.warning ('Could not parse the front page')
+    grl.callback()
+    return
+  end
+
   for id, name  in s:gmatch('<a href="http://www%.xnxx%.com/c/(.-)">(.-)</') do
     grl.debug('Got ID: "' .. id .. '" Name: "' .. name .. '"')
 
