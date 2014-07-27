@@ -59,6 +59,9 @@ url_base_videos = nil
 -- Source initialization --
 ---------------------------
 
+-- FIXME Use icon:
+-- http://m.static-pluzz.francetv.fr/img/icons/apple-icon-114x114-precomposed-cc2ea7787b276f0a942246183da3a9a3.png
+
 source = {
   id = "grl-pluzz-lua",
   name = "Pluzz (France Télévisions)",
