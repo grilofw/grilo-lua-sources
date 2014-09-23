@@ -20,6 +20,8 @@
  *
 --]]
 
+-- Test API at:
+-- http://explorer.content.guardianapis.com/
 GUARDIAN_EYEWITNESS_URL               = 'http://content.guardianapis.com/search?format=json&tag=world/series/eyewitness,type/picture&show-fields=short-url,thumbnail&show-factboxes=photography-tip&show-media=all&show-factbox-fields=pro-tip&show-media-fields=all&page=%s&page-size=%s&order-by=newest&api-key=zsduht84cwvds8kk4xmmcvj5'
 
 ---------------------------
