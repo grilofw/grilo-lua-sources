@@ -32,8 +32,7 @@ source = {
   id = "grl-yts",
   name = "YTS",
   description = "YTS",
-  -- FIXME add size
-  supported_keys = { 'thumbnail', 'genre', 'tmdb-imdb-id', 'rating', 'creation-date', 'external-url', 'title', 'id', 'url', 'mime-type' },
+  supported_keys = { 'thumbnail', 'genre', 'tmdb-imdb-id', 'rating', 'creation-date', 'external-url', 'title', 'id', 'url', 'mime-type', 'size' },
   supported_media = 'video',
   tags = { 'cinema' },
   auto_split_threshold = 50
@@ -161,8 +160,7 @@ function parse_page(page, medias)
       -- http:// becomes torrent+http://
       -- https:// becomes torrents+https://
       media.url = 'torrent+' .. item.TorrentUrl
-      -- https://bugzilla.gnome.org/show_bug.cgi?id=629002
-      -- media.size = item.SizeByte
+      media.size = item.SizeByte
 
       -- FIXME include quality info somehow
 
