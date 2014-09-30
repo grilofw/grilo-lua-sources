@@ -158,8 +158,8 @@ function parse_page(page, medias)
       media.creation_date = item.MovieYear
       media['type'] = 'video'
       media.mime_type = 'application/x-bittorrent'
-      -- http:// becomes torrent://
-      -- https:// becomes torrents://
+      -- http:// becomes torrent+http://
+      -- https:// becomes torrents+https://
       media.url = 'torrent+' .. item.TorrentUrl
       -- https://bugzilla.gnome.org/show_bug.cgi?id=629002
       -- media.size = item.SizeByte
