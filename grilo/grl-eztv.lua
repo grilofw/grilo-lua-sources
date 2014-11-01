@@ -22,11 +22,11 @@
 -- https://github.com/popcorn-official/popcorn-api/blob/master/README.md
 
 -- Page number
-EZTV_URL = 'http://eztvapi.re/shows/%s'
+EZTV_URL = 'http://eztvapi.re/shows/%s?sort=updated'
 -- IMDB ID (ttXXXXXXX)
 EZTV_DETAILS_URL = 'http://eztvapi.re/show/%s'
 -- Page then keywords
-EZTV_SEARCH_URL = 'http://eztvapi.re/shows/%s?keywords=%s'
+EZTV_SEARCH_URL = 'http://eztvapi.re/shows/%s?keywords=%s&sort=updated'
 
 ---------------------------
 -- Source initialization --
