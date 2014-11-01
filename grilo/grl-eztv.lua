@@ -101,7 +101,7 @@ function grl_source_search(text)
     table.insert(urls, url)
   end
 
-  grl.fetch(urls, "fetch_results_cb")
+  grl.fetch(urls, "fetch_series_results_cb")
 end
 
 ---------------
