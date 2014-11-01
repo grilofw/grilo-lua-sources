@@ -191,6 +191,10 @@ function fetch_results_cb(results)
     medias = parse_page(result, medias)
   end
 
+  -- Sort episodes by update date
+  local inspect = require('inspect')
+  table.sort(medias, function(a,b) return a.first_aired > b.first_aired end)
+
   local num_results = #medias
   if num_results > count then
     num_results = count
@@ -206,6 +210,7 @@ function fetch_results_cb(results)
       num_results = num_results - 1
       count = count - 1
       grl.debug ('Sending out media ' .. media.id .. ' (left: ' .. num_results .. ')')
+      media.first_aired = nil
       grl.callback(media, num_results)
     end
   end
@@ -231,9 +236,12 @@ function parse_page(page, medias)
     media.title = item.title
     media.episode = item.episode
     media.season = item.season
-    media.modification_date = first_aired
+    media.modification_date = os.date("!%Y-%m-%dT%TZ", item.first_aired)
     media.url = item.torrents["0"].url
     media.mime_type = 'application/x-bittorrent'
+
+    -- Used to sort the episodes by recency
+    media.first_aired = item.first_aired
 
     media.show = json.title
     media.studio = json.network
