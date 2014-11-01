@@ -51,12 +51,13 @@ source = {
 ---------------------------------
 
 function grl_source_browse(media_id)
-  local count = grl.get_options("count")
   local skip = grl.get_options("skip")
   local urls = {}
 
   if not media_id then
+    local count = grl.get_options("count")
     local page = skip / count + 1
+
     if page > math.floor(page) then
       local url = string.format(EZTV_URL, math.floor(page))
       grl.debug ("Fetching URL #1: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
@@ -73,6 +74,11 @@ function grl_source_browse(media_id)
 
     grl.fetch(urls, "fetch_series_results_cb")
   else
+    if skip > 0 then
+      grl.callback()
+      return
+    end
+
     local url = string.format(EZTV_DETAILS_URL, media_id)
     table.insert(urls, url)
     grl.fetch(urls, "fetch_results_cb")
@@ -177,9 +183,6 @@ function parse_series_page(page, medias)
 end
 
 function fetch_results_cb(results)
-  local count = grl.get_options("count")
-  -- FIXME handle skip
-
   if not results then
     grl.callback()
     return
@@ -196,9 +199,6 @@ function fetch_results_cb(results)
   table.sort(medias, function(a,b) return a.first_aired > b.first_aired end)
 
   local num_results = #medias
-  if num_results > count then
-    num_results = count
-  end
   if num_results == 0 then
     grl.callback()
     return
@@ -206,13 +206,10 @@ function fetch_results_cb(results)
 
   -- Send out the results
   for i, media in ipairs(medias) do
-    if count > 0 then
-      num_results = num_results - 1
-      count = count - 1
-      grl.debug ('Sending out media ' .. media.id .. ' (left: ' .. num_results .. ')')
-      media.first_aired = nil
-      grl.callback(media, num_results)
-    end
+    num_results = num_results - 1
+    grl.debug ('Sending out media ' .. media.id .. ' (left: ' .. num_results .. ')')
+    media.first_aired = nil
+    grl.callback(media, num_results)
   end
 end
 
