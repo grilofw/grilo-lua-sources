@@ -55,6 +55,12 @@ function grl_source_resolve()
     return
   end
 
+  -- Series don't apply
+  if req.show then
+    grl.callback()
+    return
+  end
+
   -- title = "Bobbi's+World"
   -- title = '1 In The Pink 1 In The Stink #7'
   -- title = string.gsub(title, " ", "+")
