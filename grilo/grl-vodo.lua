@@ -28,7 +28,7 @@ source = {
   description = "vodo.com",
   supported_media = 'video',
   supported_keys = { 'thumbnail', 'external-url', 'title', 'id', 'mime-type', 'creation-date', 'director' },
-  tags = { 'films' },
+  tags = { 'films', 'torrent' },
 }
 
 ---------------------------------
