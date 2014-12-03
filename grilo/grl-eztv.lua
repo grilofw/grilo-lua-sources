@@ -195,7 +195,7 @@ function fetch_results_cb(results)
   end
 
   -- Sort episodes by update date
-  local inspect = require('inspect')
+  -- local inspect = require('inspect')
   table.sort(medias, function(a,b) return a.first_aired > b.first_aired end)
 
   local num_results = #medias
