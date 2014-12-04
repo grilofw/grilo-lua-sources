@@ -33,7 +33,7 @@ source = {
   description = "xnxx.com",
   supported_media = 'video',
   supported_keys = { 'thumbnail', 'duration', 'external-url', 'title', 'id' },
-  tags = { 'adult' },
+  tags = { 'adult', 'net:internet' },
 }
 
 -- The number of items per page for a search

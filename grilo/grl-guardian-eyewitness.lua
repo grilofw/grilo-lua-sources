@@ -35,7 +35,7 @@ source = {
   supported_keys = { "id", "thumbnail", "title", "url", "mime-type", "author", "description", "external-url", "license" },
   supported_media = 'image',
   auto_split_threshold = 50,
-  tags = { 'news', 'photos' }
+  tags = { 'news', 'photos', 'net:internet' }
 }
 
 ------------------
