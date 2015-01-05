@@ -261,7 +261,7 @@ function parse_page(page)
     media.id = item:match('/video(.-)/')
     -- Support multiple thumbnails?
     media.thumbnail = item:match('<img src="(.-)"')
-    media.title = grl.unescape(item:match('color: #FFFFFF;">(.-)</span>'))
+    media.title = grl.unescape(item:match('title="(.-)"'))
 
     minutes = item:match('(%d+) min') or '0'
     seconds = item:match('(%d+) sec') or '0'
@@ -284,7 +284,7 @@ function fetch_front_cb(results)
     front_page = results
   end
 
-  local s = results:match('ALL SEX VIDEOS:</b><br>(.-)<a href="http://www%.xnxx%.com/tags/">')
+  local s = results:match('ALL SEX VIDEOS:</b>(.-)<a href="http://www%.xnxx%.com/tags/">')
   if not s then
     grl.warning ('Could not parse the front page')
     grl.callback()
