@@ -216,6 +216,7 @@ function fetch_results_cb(results)
       results:find('No video match with this search') then
     operation_data[grl.get_options('operation-id')] = nil
     grl.callback()
+    return
   end
 
   local op = operation_data[grl.get_options('operation-id')]
