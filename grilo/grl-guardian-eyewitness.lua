@@ -20,9 +20,7 @@
  *
 --]]
 
--- Test API at:
--- http://explorer.content.guardianapis.com/
-GUARDIAN_EYEWITNESS_URL               = 'http://content.guardianapis.com/search?format=json&tag=world/series/eyewitness,type/picture&show-fields=short-url,thumbnail&show-factboxes=photography-tip&show-media=all&show-factbox-fields=pro-tip&show-media-fields=all&page=%s&page-size=%s&order-by=newest&api-key=zsduht84cwvds8kk4xmmcvj5'
+GUARDIAN_EYEWITNESS_URL = 'http://mobile-apps.guardianapis.com/lists/tag/theguardian/mainsection/eyewitness?page=%s'
 
 ---------------------------
 -- Source initialization --
@@ -34,7 +32,7 @@ source = {
   description = "A source for browsing photos from the Guardian Eye Witness series",
   supported_keys = { "id", "thumbnail", "title", "url", "mime-type", "author", "description", "external-url", "license" },
   supported_media = 'image',
-  auto_split_threshold = 50,
+  auto_split_threshold = 20,
   tags = { 'news', 'photos', 'net:internet' }
 }
 
@@ -49,15 +47,15 @@ function grl_source_browse(media_id)
 
   local page = skip / count + 1
   if page > math.floor(page) then
-    local url = string.format(GUARDIAN_EYEWITNESS_URL, math.floor(page), count)
+    local url = string.format(GUARDIAN_EYEWITNESS_URL, math.floor(page))
     grl.debug ("Fetching URL #1: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
     table.insert(urls, url)
 
-    url = string.format(GUARDIAN_EYEWITNESS_URL, math.floor(page) + 1, count)
+    url = string.format(GUARDIAN_EYEWITNESS_URL, math.floor(page) + 1)
     grl.debug ("Fetching URL #2: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
     table.insert(urls, url)
   else
-    local url = string.format(GUARDIAN_EYEWITNESS_URL, page, count)
+    local url = string.format(GUARDIAN_EYEWITNESS_URL, page)
     grl.debug ("Fetching URL: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
     table.insert(urls, url)
   end
@@ -76,13 +74,17 @@ function guardian_eyewitness_fetch_cb(results)
   for i, result in ipairs(results) do
     local json = {}
     json = grl.lua.json.string_to_table(result)
-    if not json or json.stat == "fail" or not json.response or not json.response.results then
+
+    -- local inspect = require('inspect')
+    -- grl.debug (inspect(json.cards))
+
+    if not json or json.stat == "fail" or not json.cards then
       grl.callback()
       return
     end
 
-    for index, item in pairs(json.response.results) do
-      local media = create_media(item)
+    for index, item in pairs(json.cards) do
+      local media = create_media(item.item)
       count = count - 1
       grl.callback(media, count)
     end
@@ -98,29 +100,29 @@ end
 -- Helpers --
 -------------
 
+function create_url(image, height, width)
+  local url = image.urlTemplate
+  url = string.gsub(url, '#%{width%}', width)
+  url = string.gsub(url, '#%{height%}', height)
+  url = string.gsub(url, '#%{quality%}', '60')
+  return url
+end
+
 function create_media(item)
   local media = {}
 
   media.type = "image"
   media.id = item.id
-  media.title = item.webTitle
-  media.thumbnail = item.fields.thumbnail
+  media.title = item.title
   media.mime_type = 'image/jpeg'
-  media.external_url = item.webUrl
-
-  local last_width = 0
-  for index, picture in pairs(item.mediaAssets) do
-    if tonumber(picture.fields.width) > last_width then
-      media.url = picture.fields.secureFile
-      media.description = picture.fields.caption
-      media.author = picture.fields.photographer
-      -- if not media.author then
-      --  media.author = picture.fields.credit
-      -- end
-      media.license = "Copyright © " .. picture.fields.credit
-      last_width = tonumber(picture.fields.width)
-    end
-  end
+  media.external_url = 'http://www.theguardian.com/' .. item.id
+  media.url = create_url(item.displayImages[1],
+                         item.displayImages[1].height,
+                         item.displayImages[1].width)
+  media.thumbnail = create_url(item.displayImages[1], '-', '512')
+  media.description = item.displayImages[1].altText
+  media.license = "Copyright © " .. item.displayImages[1].credit
+  media.author = media.license
 
   return media
 end
