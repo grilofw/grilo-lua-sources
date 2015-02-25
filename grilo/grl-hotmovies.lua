@@ -113,7 +113,11 @@ function fetch_page_cb(page)
 
   -- Description
   local encoded_desc = page:match('var descfullcontent = "(.-)"')
+  if not encoded_desc then
+    encoded_desc = page:match('class="video_description" itemprop="description">(.-)</div>')
+  end
   encoded_desc = encoded_desc:gsub("%b<>", "")
+  encoded_desc = encoded_desc:gsub("^%s*(.-)%s*$", "%1")
   media.description = grl.decode(encoded_desc)
 
   -- External URL
