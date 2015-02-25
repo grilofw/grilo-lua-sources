@@ -76,8 +76,8 @@ function okgoals_fetch_cb(results)
     media.type = 'box'
     media.id = line:match('href="(match%-highlights%-.-)">')
     media.title = line:match(' %- (.-)</a>')
-    -- Remove tabs in title
-    media.title = media.title:gsub("\t", "")
+    -- Replace tabs with spaces in title
+    media.title = media.title:gsub("\t", " ")
 
     grl.callback(media, -1)
   end
