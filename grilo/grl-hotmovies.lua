@@ -113,7 +113,7 @@ function fetch_page_cb(page)
 
   -- Description
   local encoded_desc = page:match('var descfullcontent = "(.-)"')
-  -- FIXME strip html tags as well
+  encoded_desc = encoded_desc:gsub("%b<>", "")
   media.description = grl.decode(encoded_desc)
 
   -- External URL
