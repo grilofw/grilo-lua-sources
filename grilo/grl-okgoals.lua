@@ -88,15 +88,7 @@ end
 function okgoals_fetch_match_cb(results)
   local section = results:match('class="contentjogos"(.-)<div class="sidebar%-divider2">')
 
-  -- YouTube embed, such as http://www.okgoals.com/match-highlights-1424889384---49
-  if section:match('src="http://www%.youtube%.com') then
-    local media = {}
-    media.type = 'video'
-    media.title = 'Highlights'
-    media.external_url = section:match('src="(http://www%.youtube%.com/embed/.-)"')
-    media.id = section:match('src="http://www%.youtube%.com/embed/(.-)"')
-    grl.callback(media, -1)
-  end
+  local num_matches = 0
 
   for video in section:gmatch('>(.-<br.-<script data%-config=".-")') do
     local title, pw_url = video:match('(.-)<script data%-config="(.-)"')
@@ -109,12 +101,47 @@ function okgoals_fetch_match_cb(results)
     if mp4_url then
       local media = {}
       media.type = 'video'
-      media.title = title
+      media.title = title or 'Highlights'
       media.id = id
       media.url = mp4_url
       media.thumbnail = thumb_url
 
       grl.callback(media, -1)
+    end
+
+    num_matches = num_matches + 1
+  end
+
+  -- YouTube embed, such as http://www.okgoals.com/match-highlights-1424889384---49
+  if num_matches == 0 and section:match('src="http://www%.youtube%.com') then
+    local media = {}
+    media.type = 'video'
+    media.title = 'Highlights'
+    media.external_url = section:match('src="(http://www%.youtube%.com/embed/.-)"')
+    media.id = section:match('src="http://www%.youtube%.com/embed/(.-)"')
+    grl.callback(media, -1)
+
+    num_matches = num_matches + 1
+  end
+
+  -- Pages with single highlights and no titles
+  -- such as http://www.okgoals.com/match-highlights-1424630627---44
+  print (section)
+  if num_matches == 0 then
+    pw_url = section:match('<script data%-config="(.-)"')
+
+    if pw_url then
+      local mp4_url, thumb_url, id = process_url(pw_url)
+      if mp4_url then
+        local media = {}
+        media.type = 'video'
+        media.title = 'Highlights'
+        media.id = id
+        media.url = mp4_url
+        media.thumbnail = thumb_url
+
+        grl.callback(media, -1)
+      end
     end
   end
 
