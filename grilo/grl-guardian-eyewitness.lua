@@ -33,7 +33,8 @@ source = {
   supported_keys = { "id", "thumbnail", "title", "url", "mime-type", "author", "description", "external-url", "license" },
   supported_media = 'image',
   auto_split_threshold = 20,
-  tags = { 'news', 'photos', 'net:internet' }
+  tags = { 'news', 'photos', 'net:internet' },
+  icon = 'resource:///org/gnome/grilo/plugins/guardian-eyewitness/grilo/guardian-eyewitness.png'
 }
 
 ------------------
