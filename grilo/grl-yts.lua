@@ -19,9 +19,9 @@
 --]]
 
 -- API Documentation available at:
--- http://yts.re/api
+-- http://yts.to/api
 
-YTS_URL = 'http://yts.re/api/list.json?set=%s&limit=%s'
+YTS_URL = 'http://yts.to/api/list.json?set=%s&limit=%s'
 YTS_SEARCH_URL = YTS_URL .. '&keywords=%s'
 
 ---------------------------
