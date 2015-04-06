@@ -157,7 +157,10 @@ function process_url(pw_url)
 
   local hostid, videoid = pw_url:match('http://config%.playwire%.com/(%d-)/videos/v2/(%d-)/zeus%.json')
   if not hostid or not videoid then
-    return nil, nil, nil
+    hostid, videoid = pw_url:match('.-config%.playwire%.com/(%d-)/videos/v2/(%d-)/zeus%.json')
+    if not hostid or not videoid then
+      return nil, nil, nil
+    end
   end
 
   local url = 'http://cdn.phoenix.intergi.com/' .. hostid .. '/videos/' .. videoid .. '/video-sd.mp4?hosting_id=' .. hostid
