@@ -80,10 +80,13 @@ function okgoals_fetch_cb(results)
     -- Replace tabs with spaces in title
     media.title = media.title:gsub("\t", " ")
 
-    grl.callback(media, -1)
+    count = count - 1
+    grl.callback(media, count)
   end
 
-  grl.callback()
+  if count > 0 then
+    grl.callback()
+  end
 end
 
 function okgoals_fetch_match_cb(results)
