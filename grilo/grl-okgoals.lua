@@ -155,7 +155,7 @@ end
 
 function process_url(pw_url)
 
-  local hostid, videoid = pw_url:match('http://config.playwire.com/(%d-)/videos/v2/(%d-)/zeus.json')
+  local hostid, videoid = pw_url:match('http://config%.playwire%.com/(%d-)/videos/v2/(%d-)/zeus%.json')
   if not hostid or not videoid then
     return nil, nil, nil
   end
