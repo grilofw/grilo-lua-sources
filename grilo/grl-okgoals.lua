@@ -160,6 +160,8 @@ function process_url(pw_url)
 
   local hostid, videoid = pw_url:match('http://config%.playwire%.com/(%d-)/videos/v2/(%d-)/zeus%.json')
   if not hostid or not videoid then
+    -- Pages with relative URLs such as
+    -- http://www.okgoals.com/match-highlights-1428193008---44
     hostid, videoid = pw_url:match('.-config%.playwire%.com/(%d-)/videos/v2/(%d-)/zeus%.json')
     if not hostid or not videoid then
       return nil, nil, nil
