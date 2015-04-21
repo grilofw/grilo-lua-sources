@@ -20,7 +20,7 @@
  *
 --]]
 
-GUARDIAN_EYEWITNESS_URL = 'http://mobile-apps.guardianapis.com/lists/tag/theguardian/mainsection/eyewitness?page=%s'
+GUARDIAN_EYEWITNESS_URL = 'http://mobile-apps.guardianapis.com/lists/tag/theguardian/mainsection/eyewitness?page=%d'
 
 ---------------------------
 -- Source initialization --
