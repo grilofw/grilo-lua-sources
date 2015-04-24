@@ -212,15 +212,20 @@ function get_browse_url(tag, page)
 end
 
 function fetch_results_cb(results)
+  local operation_id = grl.get_options('operation-id')
+  if not operation_id then
+    grl.warning ('Failed to get results for operation-id ' .. operation_id)
+    return
+  end
+
   if not results or
       results:find('No video match with this search') then
-    operation_data[grl.get_options('operation-id')] = nil
+    operation_data[operation_id] = nil
     grl.callback()
     return
   end
 
-  local op = operation_data[grl.get_options('operation-id')]
-
+  local op = operation_data[operation_id]
   local medias = parse_page(results)
   local num_results = #medias
   save_num_items(op.is_search, op.text, op.page, num_results)
@@ -233,7 +238,7 @@ function fetch_results_cb(results)
       op.count = op.count - 1
       grl.callback(media, op.count)
       if op.count == 0 then
-        operation_data[grl.get_options('operation-id')] = nil
+        operation_data[operation_id] = nil
         return
       end
     end
