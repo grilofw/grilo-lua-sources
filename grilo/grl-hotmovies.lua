@@ -61,10 +61,14 @@ function grl_source_resolve()
     return
   end
 
+  -- Only handle ASCII, the site falls over for anything else
+  if not is_ascii(req.title) then
+    grl.callback()
+    return
+  end
   -- title = "Bobbi's+World"
   -- title = '1 In The Pink 1 In The Stink #7'
-  -- title = string.gsub(title, " ", "+")
-  title = string.gsub(req.title, " ", "+")
+  title = grl.encode(req.title)
   url = string.format(HOTMOVIES_DEFAULT_QUERY, title)
   grl.debug ("Fetching search page " .. url)
   grl.fetch(url, "fetch_results_cb")
@@ -74,8 +78,20 @@ end
 -- Utilities --
 ---------------
 
+function is_ascii(str)
+  -- From http://stackoverflow.com/questions/24190608/lua-string-byte-for-non-ascii-characters
+  for c in str:gmatch("[\0-\x7F\xC2-\xF4][\x80-\xBF]*") do
+    if #c >= 2 then
+      return false
+    end
+  end
+
+  return true
+end
+
 function fetch_results_cb(results)
   if results and
+    not results == '' and
     not results:find('Your search resulted in 0 matches') and
     not results:find('You can search names of stars, titles of movies, directors, specific niches or fetishes, studios etc%.') then
       local id = results:match('divModalScenePreview_(.-)"')
