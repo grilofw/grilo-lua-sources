@@ -33,7 +33,7 @@ source = {
   supported_keys = { "id", "title", "thumbnail", "url", "description", "rating",
                      "author", "artist", "genre" },
   supported_media = 'image',
-  tags = { 'comics', 'net:internet' }
+  tags = { 'comics', 'net:internet', 'net:plaintext' }
 }
 
 categories = {

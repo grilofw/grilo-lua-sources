@@ -34,7 +34,7 @@ source = {
   description = "YTS",
   supported_keys = { 'thumbnail', 'genre', 'tmdb-imdb-id', 'rating', 'creation-date', 'external-url', 'title', 'id', 'url', 'mime-type', 'size' },
   supported_media = 'video',
-  tags = { 'cinema', 'torrent', 'net:internet' },
+  tags = { 'cinema', 'torrent', 'net:internet', 'net:plaintext' },
   auto_split_threshold = 50
 }
 

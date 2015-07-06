@@ -32,7 +32,7 @@ source = {
     ["type"] = "video",
     required = { "title" },
   },
-  tags = { 'adult', 'net:internet' }
+  tags = { 'adult', 'net:internet', 'net:plaintext' }
 }
 
 ------------------

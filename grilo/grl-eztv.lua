@@ -38,7 +38,7 @@ source = {
   description = "EzTV",
   supported_keys = { 'tmdb-imdb-id', 'rating', 'creation-date', 'modification-date', 'title', 'id', 'url', 'mime-type', 'description', 'season', 'episode', 'show', 'studio', 'thetvdb-banner', 'thetvdb-fanart', 'thetvdb-poster', 'thetvdb-id' },
   supported_media = 'video',
-  tags = { 'tv', 'torrent', 'net:internet' },
+  tags = { 'tv', 'torrent', 'net:internet', 'net:plaintext' },
   auto_split_threshold = 50
 }
 

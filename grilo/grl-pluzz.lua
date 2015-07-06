@@ -68,7 +68,7 @@ source = {
   description = "A source for browsing catch up TV from France Télévisions",
   supported_keys = { "id", "thumbnail", "title", "url", 'genre', 'creation-date' },
   supported_media = 'video',
-  tags = { 'tv', 'country:fr', 'net:internet' },
+  tags = { 'tv', 'country:fr', 'net:internet', 'net:plaintext' },
   icon = 'resource:///org/gnome/grilo/plugins/pluzz/grilo/pluzz.png'
 }
 

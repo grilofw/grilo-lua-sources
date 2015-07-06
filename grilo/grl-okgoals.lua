@@ -35,7 +35,7 @@ source = {
   supported_keys = { "id", "thumbnail", "title", "url", "mime-type", "external-url" },
   supported_media = 'video',
   auto_split_threshold = 33,
-  tags = { 'news', 'sport', 'net:internet' },
+  tags = { 'news', 'sport', 'net:internet', 'net:plaintext' },
   icon = 'resource:///org/gnome/grilo/plugins/okgoals/grilo/okgoals.png'
 }
 
