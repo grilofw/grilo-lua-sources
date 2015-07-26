@@ -20,7 +20,6 @@
  *
 --]]
 
-OKGOALS_URL               = 'http://www.okgoals.com/'
 OKGOALS_START_FROM_URL    = 'http://www.okgoals.com/page-start_from_%d_archive_.html'
 OKGOALS_MATCH_URL         = 'http://www.okgoals.com/%s'
 
@@ -55,12 +54,9 @@ function grl_source_browse(media_id)
     return
   end
 
-  if skip == 0 then
-    grl.fetch(OKGOALS_URL, "okgoals_fetch_cb")
-  else
-    local url = string.format(OKGOALS_START_FROM_URL, skip)
-    grl.fetch(url, "okgoals_fetch_cb")
-  end
+  local url = string.format(OKGOALS_START_FROM_URL, skip)
+  grl.debug ('Fetching URL: ' .. url)
+  grl.fetch(url, "okgoals_fetch_cb")
 end
 
 ------------------------
