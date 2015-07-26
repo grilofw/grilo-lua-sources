@@ -50,6 +50,7 @@ function grl_source_browse(media_id)
   -- A specific match?
   if media_id then
     local url = string.format(OKGOALS_MATCH_URL, media_id)
+    grl.debug ('Fetching URL for single match: ' .. url)
     grl.fetch(url, "okgoals_fetch_match_cb")
     return
   end
