@@ -77,6 +77,9 @@ function okgoals_fetch_cb(results)
     media.title = media.title:gsub("\t", " ")
 
     count = count - 1
+    if count < 0 then
+      return
+    end
     grl.callback(media, count)
   end
 
