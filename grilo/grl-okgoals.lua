@@ -21,7 +21,7 @@
 --]]
 
 OKGOALS_URL               = 'http://www.okgoals.com/'
-OKGOALS_START_FROM_URL    = 'http://www.okgoals.com/page-start_from_%s_archive_.html'
+OKGOALS_START_FROM_URL    = 'http://www.okgoals.com/page-start_from_%d_archive_.html'
 OKGOALS_MATCH_URL         = 'http://www.okgoals.com/%s'
 
 ---------------------------
