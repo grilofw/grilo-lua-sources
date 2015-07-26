@@ -129,7 +129,6 @@ function okgoals_fetch_match_cb(results)
 
   -- Pages with single highlights and no titles
   -- such as http://www.okgoals.com/match-highlights-1424630627---44
-  print (section)
   if num_matches == 0 then
     pw_url = section:match('<script data%-config="(.-)"')
 
@@ -146,6 +145,10 @@ function okgoals_fetch_match_cb(results)
         grl.callback(media, -1)
       end
     end
+  end
+
+  if num_matches == 0 then
+    grl.warning ('Could not parse video, section is: ' .. section)
   end
 
   grl.callback()
