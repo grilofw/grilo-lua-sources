@@ -67,7 +67,12 @@ end
 function okgoals_fetch_cb(results)
   local count = grl.get_options("count")
 
-  results = results:match('<div class="listajogos">(.-)<div class="wpnavi">')
+  results = results:match('<div class="matchlisting">(.-)<div class="wpnavi">')
+  if not results then
+    grl.callback()
+    return
+  end
+
   for line in results:gmatch('(<a href=.-)</div>') do
     local media = {}
 
@@ -90,7 +95,11 @@ function okgoals_fetch_cb(results)
 end
 
 function okgoals_fetch_match_cb(results)
-  local section = results:match('class="contentjogos"(.-)<div class="sidebar%-divider2">')
+  local section = results:match('class="matchcontainer"(.-)<div class="sidebar%-divider2">')
+  if not section then
+    grl.callback()
+    return
+  end
 
   local num_matches = 0
 
