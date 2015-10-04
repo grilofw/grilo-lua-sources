@@ -1,11 +1,11 @@
 
-GRILO_DIR=`pkg-config --variable datarootdir grilo-0.2`/grilo-plugins/grl-lua-factory/
+GRILO_DIR=`pkg-config --variable datarootdir grilo-0.3`/grilo-plugins/grl-lua-factory/
 QUVI_DIR=`pkg-config --variable scriptsdir libquvi-scripts-0.9`/0.9/media/
 
 all: check-dirs resources
 
 check-dirs:
-	@pkg-config --variable datarootdir grilo-0.2 > /dev/null
+	@pkg-config --variable datarootdir grilo-0.3 > /dev/null
 	@pkg-config --variable scriptsdir libquvi-scripts-0.9 > /dev/null
 
 resources: template-resource.xml
