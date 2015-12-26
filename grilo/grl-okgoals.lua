@@ -118,11 +118,11 @@ function okgoals_fetch_match_cb(results)
       media.id = id
       media.url = mp4_url
       media.thumbnail = thumb_url
-
       grl.callback(media, -1)
+
+      num_matches = num_matches + 1
     end
 
-    num_matches = num_matches + 1
   end
 
   -- YouTube embed, such as http://www.okgoals.com/match-highlights-1424889384---49
@@ -151,8 +151,9 @@ function okgoals_fetch_match_cb(results)
         media.id = id
         media.url = mp4_url
         media.thumbnail = thumb_url
-
         grl.callback(media, -1)
+
+        num_matches = num_matches + 1
       end
     end
   end
