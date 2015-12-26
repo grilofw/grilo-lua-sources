@@ -139,7 +139,7 @@ function browse_real(media_id)
     for i, name in ipairs(files) do
       local media = {}
       media.id = name
-      media.type = 'box'
+      media.type = 'container'
       media.title = channels[name]
       grl.callback(media, -1)
     end

@@ -163,7 +163,7 @@ function parse_series_page(page, medias)
 
     local media = {}
 
-    media.type = 'box'
+    media.type = 'container'
     media.id = item._id
     if item.images then
       media.thetvdb_banner = item.images.banner

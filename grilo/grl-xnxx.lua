@@ -303,7 +303,7 @@ function fetch_front_cb(results)
     -- FIXME include tags? uniquify?
 
     media = {}
-    media.type = 'box'
+    media.type = 'container'
     media.id = id
     media.title = name
 

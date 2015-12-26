@@ -76,7 +76,7 @@ function okgoals_fetch_cb(results)
   for line in results:gmatch('(<a href=.-)</div>') do
     local media = {}
 
-    media.type = 'box'
+    media.type = 'container'
     media.id = line:match('href="(match%-highlights%-.-)">')
     media.title = line:match(' %- (.-)</a>')
     -- Replace tabs with spaces in title
