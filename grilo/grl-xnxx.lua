@@ -73,7 +73,7 @@ function grl_source_browse(media_id)
     if front_page then
       fetch_front_cb(front_page)
     else
-      grl.fetch('http://www.xnxx.com/', 'fetch_front_cb')
+      grl.fetch('http://www.xnxx.com/', fetch_front_cb)
     end
     return
   end
@@ -91,7 +91,7 @@ function grl_source_browse(media_id)
 
   local url = get_browse_url(media_id, page)
   grl.debug('Fetching URL: ' .. url .. ' (count: ' .. count .. ' skip: ' .. skip .. ')')
-  grl.fetch(url, "fetch_results_cb")
+  grl.fetch(url, fetch_results_cb)
 
   -- Remember operation details
   operation_data[grl.get_options('operation-id')] = {
@@ -123,7 +123,7 @@ function grl_source_search(text)
 
   local url = get_search_url(text, page)
   grl.debug('Fetching URL: ' .. url .. ' (count: ' .. count .. ' skip: ' .. skip .. ')')
-  grl.fetch(url, "fetch_results_cb")
+  grl.fetch(url, fetch_results_cb)
 
   -- Remember operation details
   operation_data[grl.get_options('operation-id')] = {
@@ -254,7 +254,7 @@ function fetch_results_cb(results)
     url = get_browse_url(op.text, op.page)
   end
   grl.debug('Fetching URL: ' .. url)
-  grl.fetch(url, "fetch_results_cb")
+  grl.fetch(url, fetch_results_cb)
 end
 
 function parse_page(page)

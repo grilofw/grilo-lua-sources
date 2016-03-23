@@ -79,7 +79,7 @@ source = {
 function grl_source_browse(media_id)
   if cache_needs_download then
     grl.unzip('http://webservices.francetelevisions.fr/catchup/flux/flux_main.zip',
-              files, "pluzz_fetch_cb")
+              files, pluzz_fetch_cb)
   else
     grl.debug('Using cached version of the manifest')
     process_op()

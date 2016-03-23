@@ -72,7 +72,7 @@ function grl_source_browse(media_id)
       table.insert(urls, url)
     end
 
-    grl.fetch(urls, "fetch_series_results_cb")
+    grl.fetch(urls, fetch_series_results_cb)
   else
     if skip > 0 then
       grl.callback()
@@ -81,7 +81,7 @@ function grl_source_browse(media_id)
 
     local url = string.format(EZTV_DETAILS_URL, media_id)
     table.insert(urls, url)
-    grl.fetch(urls, "fetch_results_cb")
+    grl.fetch(urls, fetch_results_cb)
   end
 end
 
@@ -107,7 +107,7 @@ function grl_source_search(text)
     table.insert(urls, url)
   end
 
-  grl.fetch(urls, "fetch_series_results_cb")
+  grl.fetch(urls, fetch_series_results_cb)
 end
 
 ---------------

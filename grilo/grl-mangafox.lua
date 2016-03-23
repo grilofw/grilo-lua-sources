@@ -71,12 +71,12 @@ function grl_source_browse(media_id)
     MANGAFOX_BROWSE_MATCH_CHAPTERS = "/Mangafox/Volume.-$"
 
     if media_id:match(MANGAFOX_BROWSE_MATCH_IMAGES) then
-      grl.fetch(media_id, "mangafox_browse_images_cb")
+      grl.fetch(media_id, mangafox_browse_images_cb)
     elseif media_id:match(MANGAFOX_BROWSE_MATCH_CHAPTERS) then
       local url = media_id:match("(.-)" .. MANGAFOX_BROWSE_MATCH_CHAPTERS)
-      grl.fetch(url, "mangafox_browse_chapters_cb")
+      grl.fetch(url, mangafox_browse_chapters_cb)
     else
-      grl.fetch(media_id, "mangafox_browse_volumes_cb")
+      grl.fetch(media_id, mangafox_browse_volumes_cb)
     end
     return
   end
@@ -95,7 +95,7 @@ function grl_source_browse(media_id)
         page_skip = mangafox_page_size
         page = page + 1
       end
-      grl.fetch(urls, "mangafox_browse_category_fetch_cb")
+      grl.fetch(urls, mangafox_browse_category_fetch_cb)
       return
     end
   end
@@ -157,7 +157,7 @@ function mangafox_browse_images_cb(feed)
       urls[#urls + 1] = url
     end
   end
-  grl.fetch(urls, "mangafox_fetch_images_cb")
+  grl.fetch(urls, mangafox_fetch_images_cb)
 end
 
 function mangafox_browse_chapters_cb(feed)

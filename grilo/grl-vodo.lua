@@ -44,7 +44,7 @@ function grl_source_browse(media_id)
     return
   end
 
-  grl.fetch('http://vodo.net/films/', 'fetch_front_cb')
+  grl.fetch('http://vodo.net/films/', fetch_front_cb)
 end
 
 ---------------

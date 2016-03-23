@@ -66,7 +66,7 @@ function grl_source_browse(media_id)
     table.insert(urls, url)
   end
 
-  grl.fetch(urls, "fetch_results_cb")
+  grl.fetch(urls, fetch_results_cb)
 end
 
 function grl_source_search(text)
@@ -91,7 +91,7 @@ function grl_source_search(text)
     table.insert(urls, url)
   end
 
-  grl.fetch(urls, "fetch_results_cb")
+  grl.fetch(urls, fetch_results_cb)
 end
 
 ---------------

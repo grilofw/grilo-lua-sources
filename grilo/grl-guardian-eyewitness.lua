@@ -61,7 +61,7 @@ function grl_source_browse(media_id)
     table.insert(urls, url)
   end
 
-  grl.fetch(urls, "guardian_eyewitness_fetch_cb")
+  grl.fetch(urls, guardian_eyewitness_fetch_cb)
 end
 
 ------------------------

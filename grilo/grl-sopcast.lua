@@ -57,7 +57,7 @@ function grl_source_browse()
   else
     local url = SOPCAST_URL
     grl.debug('Fetching URL: ' .. url .. ' (count: ' .. count .. ' skip: ' .. skip .. ')')
-    grl.fetch(url, "sopcast_fetch_cb")
+    grl.fetch(url, sopcast_fetch_cb)
   end
 end
 

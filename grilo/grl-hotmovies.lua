@@ -71,7 +71,7 @@ function grl_source_resolve()
   title = grl.encode(req.title)
   url = string.format(HOTMOVIES_DEFAULT_QUERY, title)
   grl.debug ("Fetching search page " .. url)
-  grl.fetch(url, "fetch_results_cb")
+  grl.fetch(url, fetch_results_cb)
 end
 
 ---------------
@@ -97,7 +97,7 @@ function fetch_results_cb(results)
       local id = results:match('divModalScenePreview_(.-)"')
       local url = 'http://www.hotmovies.com/video/' .. id
       grl.debug ("Fetching movie page " .. url .. " for ID " .. id)
-      grl.fetch(url, "fetch_page_cb")
+      grl.fetch(url, fetch_page_cb)
   else
     grl.callback()
   end
