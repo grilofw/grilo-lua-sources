@@ -67,8 +67,9 @@ end
 function okgoals_fetch_cb(results)
   local count = grl.get_options("count")
 
-  results = results:match('<div class="matchlisting">(.-)<div class="wpnavi">')
+  results = results:match('<div class="matcheslisting">(.-)<div class="clear">')
   if not results then
+    grl.debug("Couldn't find match listing in page")
     grl.callback()
     return
   end
