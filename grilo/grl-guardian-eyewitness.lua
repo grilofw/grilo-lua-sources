@@ -21,6 +21,7 @@
 --]]
 
 GUARDIAN_EYEWITNESS_URL = 'http://mobile-apps.guardianapis.com/lists/tag/theguardian/mainsection/eyewitness?page=%d'
+DEFAULT_COUNT           = 20
 
 ---------------------------
 -- Source initialization --
@@ -32,7 +33,7 @@ source = {
   description = "A source for browsing photos from the Guardian Eye Witness series",
   supported_keys = { "id", "thumbnail", "title", "url", "mime-type", "author", "description", "external-url", "license" },
   supported_media = 'image',
-  auto_split_threshold = 20,
+  auto_split_threshold = DEFAULT_COUNT,
   tags = { 'news', 'photos', 'net:internet', 'net:plaintext' },
   icon = 'resource:///org/gnome/grilo/plugins/guardian-eyewitness/grilo/guardian-eyewitness.png'
 }
@@ -46,18 +47,19 @@ function grl_source_browse(media_id)
   local skip = grl.get_options("skip")
   local urls = {}
 
-  local page = skip / count + 1
+  -- page count starts from 1
+  local page = skip / DEFAULT_COUNT + 1
   if page > math.floor(page) then
     local url = string.format(GUARDIAN_EYEWITNESS_URL, math.floor(page))
-    grl.debug ("Fetching URL #1: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
+    grl.debug ("Fetching URL #1: " .. url .. " (page: " .. math.floor(page) .. " starting at: " .. (math.floor(page)) * DEFAULT_COUNT .. " count: " .. count .. " skip: " .. skip .. ")")
     table.insert(urls, url)
 
     url = string.format(GUARDIAN_EYEWITNESS_URL, math.floor(page) + 1)
-    grl.debug ("Fetching URL #2: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
+    grl.debug ("Fetching URL #2: " .. url .. " (page: " .. math.floor(page) + 1 .. " starting at: " .. (math.floor(page) + 1) * DEFAULT_COUNT .. " count: " .. count .. " skip: " .. skip .. ")")
     table.insert(urls, url)
   else
     local url = string.format(GUARDIAN_EYEWITNESS_URL, page)
-    grl.debug ("Fetching URL: " .. url .. " (count: " .. count .. " skip: " .. skip .. ")")
+    grl.debug ("Fetching URL: " .. url .. " (page: " .. page .. " starting at: " .. (page - 1) * DEFAULT_COUNT .. " count: " .. count .. " skip: " .. skip .. ")")
     table.insert(urls, url)
   end
 
@@ -71,6 +73,10 @@ end
 -- return all the media found
 function guardian_eyewitness_fetch_cb(results)
   local count = grl.get_options("count")
+  local skip = grl.get_options("skip")
+
+  local page = skip / DEFAULT_COUNT + 1
+  skip = skip - (math.floor(page) -1) * DEFAULT_COUNT
 
   for i, result in ipairs(results) do
     local json = {}
@@ -85,14 +91,18 @@ function guardian_eyewitness_fetch_cb(results)
     end
 
     for index, item in pairs(json.cards) do
-      local media = create_media(item.item)
-      count = count - 1
-      grl.callback(media, count)
-    end
+      if skip > 0 then
+        skip = skip - 1
+      else
+        local media = create_media(item.item)
+        count = count - 1
+        grl.callback(media, count)
 
-    -- Bail out if we've given enough items
-    if count == 0 then
-      return
+        -- Bail out if we've given enough items
+        if count == 0 then
+          return
+        end
+      end
     end
   end
 end
