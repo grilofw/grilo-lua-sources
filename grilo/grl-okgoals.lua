@@ -75,19 +75,24 @@ function okgoals_fetch_cb(results)
   end
 
   for line in results:gmatch('(<a href=.-)</div>') do
-    local media = {}
 
-    media.type = 'container'
-    media.id = line:match('href="(match%-highlights%-.-)">')
-    media.title = line:match(' %- (.-)</a>')
-    -- Replace tabs with spaces in title
-    media.title = media.title:gsub("\t", " ")
+    local id = line:match('href="(match%-highlights%-.-)">')
+    -- Skip non-highlight lines
+    if id then
+      local media = {}
 
-    count = count - 1
-    if count < 0 then
-      return
+      media.type = 'container'
+      media.id = id
+      media.title = line:match(' %- (.-)</a>')
+      -- Replace tabs with spaces in title
+      media.title = media.title:gsub("\t", " ")
+
+      count = count - 1
+      if count < 0 then
+        return
+      end
+      grl.callback(media, count)
     end
-    grl.callback(media, count)
   end
 
   if count > 0 then
